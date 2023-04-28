@@ -13,6 +13,7 @@
 # limitations under the License.
 
 from . import (
+    replit_lm,
     albert,
     align,
     altclip,
