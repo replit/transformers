@@ -122,6 +122,7 @@ _import_structure = {
     ],
     "models": [],
     # Models
+    "models.replit_lm": ["REPLIT_LM_PRETRAINED_CONFIG_ARCHIVE_MAP", "ReplitLMConfig", "ReplitLMTokenizer"],
     "models.albert": ["ALBERT_PRETRAINED_CONFIG_ARCHIVE_MAP", "AlbertConfig"],
     "models.align": [
         "ALIGN_PRETRAINED_CONFIG_ARCHIVE_MAP",
@@ -395,6 +396,7 @@ _import_structure = {
         "NystromformerConfig",
     ],
     "models.oneformer": ["ONEFORMER_PRETRAINED_CONFIG_ARCHIVE_MAP", "OneFormerConfig", "OneFormerProcessor"],
+    "models.open_llama": ["OPEN_LLAMA_PRETRAINED_CONFIG_ARCHIVE_MAP", "OpenLlamaConfig"],
     "models.openai": ["OPENAI_GPT_PRETRAINED_CONFIG_ARCHIVE_MAP", "OpenAIGPTConfig", "OpenAIGPTTokenizer"],
     "models.opt": ["OPTConfig"],
     "models.owlvit": [
@@ -720,6 +722,7 @@ except OptionalDependencyNotAvailable:
     ]
 else:
     # Fast tokenizers structure
+    _import_structure["models.replit_lm"].append("ReplitLMTokenizerFast")
     _import_structure["models.albert"].append("AlbertTokenizerFast")
     _import_structure["models.bart"].append("BartTokenizerFast")
     _import_structure["models.barthez"].append("BarthezTokenizerFast")
@@ -958,6 +961,22 @@ else:
     _import_structure["modeling_utils"] = ["PreTrainedModel"]
 
     # PyTorch models structure
+
+    _import_structure["models.replit_lm"].extend(
+        [
+            "REPLIT_LM_PRETRAINED_MODEL_ARCHIVE_LIST",
+            "ReplitLMForMaskedLM",
+            "ReplitLMForCausalLM",
+            "ReplitLMForMultipleChoice",
+            "ReplitLMForQuestionAnswering",
+            "ReplitLMForSequenceClassification",
+            "ReplitLMForTokenClassification",
+            "ReplitLMLayer",
+            "ReplitLMModel",
+            "ReplitLMPreTrainedModel",
+            "load_tf_weights_in_replit_lm",
+        ]
+    )
     _import_structure["models.albert"].extend(
         [
             "ALBERT_PRETRAINED_MODEL_ARCHIVE_LIST",
@@ -2122,6 +2141,9 @@ else:
             "OneFormerModel",
             "OneFormerPreTrainedModel",
         ]
+    )
+    _import_structure["models.open_llama"].extend(
+        ["OpenLlamaForCausalLM", "OpenLlamaForSequenceClassification", "OpenLlamaModel", "OpenLlamaPreTrainedModel"]
     )
     _import_structure["models.openai"].extend(
         [
@@ -3868,6 +3890,7 @@ if TYPE_CHECKING:
         load_tf2_weights_in_pytorch_model,
     )
     from .models.albert import ALBERT_PRETRAINED_CONFIG_ARCHIVE_MAP, AlbertConfig
+    from .models.replit_lm import REPLIT_LM_PRETRAINED_CONFIG_ARCHIVE_MAP, ReplitLMConfig, ReplitLMTokenizer
     from .models.align import (
         ALIGN_PRETRAINED_CONFIG_ARCHIVE_MAP,
         AlignConfig,
@@ -4120,6 +4143,7 @@ if TYPE_CHECKING:
     from .models.nllb_moe import NLLB_MOE_PRETRAINED_CONFIG_ARCHIVE_MAP, NllbMoeConfig
     from .models.nystromformer import NYSTROMFORMER_PRETRAINED_CONFIG_ARCHIVE_MAP, NystromformerConfig
     from .models.oneformer import ONEFORMER_PRETRAINED_CONFIG_ARCHIVE_MAP, OneFormerConfig, OneFormerProcessor
+    from .models.open_llama import OPEN_LLAMA_PRETRAINED_CONFIG_ARCHIVE_MAP, OpenLlamaConfig
     from .models.openai import OPENAI_GPT_PRETRAINED_CONFIG_ARCHIVE_MAP, OpenAIGPTConfig, OpenAIGPTTokenizer
     from .models.opt import OPTConfig
     from .models.owlvit import (
@@ -4423,6 +4447,7 @@ if TYPE_CHECKING:
         from .utils.dummy_tokenizers_objects import *
     else:
         # Fast tokenizers imports
+        from .models.replit_lm import ReplitLMTokenizerFast
         from .models.albert import AlbertTokenizerFast
         from .models.bart import BartTokenizerFast
         from .models.barthez import BarthezTokenizerFast
@@ -4622,6 +4647,20 @@ if TYPE_CHECKING:
         from .modeling_utils import PreTrainedModel
 
         # PyTorch model imports
+
+        from .models.replit_lm import (
+            REPLIT_LM_PRETRAINED_MODEL_ARCHIVE_LIST,
+            ReplitLMForMaskedLM,
+            ReplitLMForCausalLM,
+            ReplitLMForMultipleChoice,
+            ReplitLMForQuestionAnswering,
+            ReplitLMForSequenceClassification,
+            ReplitLMForTokenClassification,
+            ReplitLMLayer,
+            ReplitLMModel,
+            ReplitLMPreTrainedModel,
+            load_tf_weights_in_replit_lm,
+        )
         from .models.albert import (
             ALBERT_PRETRAINED_MODEL_ARCHIVE_LIST,
             AlbertForMaskedLM,
@@ -5567,6 +5606,12 @@ if TYPE_CHECKING:
             OneFormerForUniversalSegmentation,
             OneFormerModel,
             OneFormerPreTrainedModel,
+        )
+        from .models.open_llama import (
+            OpenLlamaForCausalLM,
+            OpenLlamaForSequenceClassification,
+            OpenLlamaModel,
+            OpenLlamaPreTrainedModel,
         )
         from .models.openai import (
             OPENAI_GPT_PRETRAINED_MODEL_ARCHIVE_LIST,

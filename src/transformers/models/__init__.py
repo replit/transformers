@@ -13,6 +13,7 @@
 # limitations under the License.
 
 from . import (
+    replit_lm,
     albert,
     align,
     altclip,
@@ -138,6 +139,7 @@ from . import (
     nllb_moe,
     nystromformer,
     oneformer,
+    open_llama,
     openai,
     opt,
     owlvit,
